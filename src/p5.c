@@ -1,13 +1,12 @@
 /*********************************************************************************************************
-											C R E D I T S
+					C R E D I T S
 
 This application uses DISLIN v11.1 plotting library. The DISLIN software is free for non-commercial use.
 You can find more information about the project below.
 
 Autor: Helmut Michels
 DISLIN Home Page: http://www.dislin.de
-/
-**********************************************************************************************************/
+/**********************************************************************************************************/
 #include "dislin.h"
 #include <stdio.h>
 #include <math.h>
@@ -94,7 +93,7 @@ void getChromosome(int c_lgth, int chromosome[c_lgth], int phenotype){
 	}
 }
 
-/*seleccion por ruleta*/
+/*seleccion por ruleta mediante jerarquias*/
 void selection(float *max, float *min, float *avg, int p_lgth, int c_lgth, int parent[p_lgth][c_lgth], const int population[p_lgth][c_lgth], float (*f_fitness)(int lgth, const int chromosome[lgth])){
 	int i, j, k, *index = malloc(sizeof(int)*p_lgth);
 	float minimal, maximal;
@@ -126,8 +125,8 @@ void selection(float *max, float *min, float *avg, int p_lgth, int c_lgth, int p
 		if(fitness[i]>(*max)) (*max) = fitness[i];
 		if(fitness[i]<(*min)) (*min) = fitness[i];
 	}
-	*avg = f_sum/p_lgth;
-	/*obtener valor esperado(probabilidad)*/
+	*avg = f_sum/(float)p_lgth;
+	/*obtener valor esperado(probabilidad) de seleccion en base a la jerarquia del individuo*/
 	maximal = 1.1;
 	minimal = 2.0 - maximal;
 	for(i = 0;i<p_lgth;i++){
